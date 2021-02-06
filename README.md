@@ -4,4 +4,4 @@ Creates a server with an API and a client that interacts with that API in order 
 
 * `go mod init github.com/mattcullenmeyer/github-server-and-client`
 * `docker build -t github-server .`
-* `docker run -d -p 8080:8080 github-server`
+* `docker run -it -p 8080:8080 github-server`
