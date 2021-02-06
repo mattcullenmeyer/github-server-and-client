@@ -16,7 +16,7 @@ type github struct {
 // GetRepoStars is a function to return number of stars for a given repo
 func GetRepoStars(origin string) string {
 	url := fmt.Sprintf("https://api.github.com/repos/%s", origin)
-	fmt.Println(url)
+
 	res, err := http.Get(url)
 	if err != nil {
 		log.Fatal(err)

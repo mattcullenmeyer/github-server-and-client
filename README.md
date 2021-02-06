@@ -5,3 +5,4 @@ Creates a server with an API and a client that interacts with that API in order 
 * `go mod init github.com/mattcullenmeyer/github-server-and-client`
 * `docker build -t github-server .`
 * `docker run -it -p 8080:8080 github-server`
+* `http://localhost:8080/api?repo=jasonrudolph/keyboard&repo=mattcullenmeyer/github-server-and-client`
