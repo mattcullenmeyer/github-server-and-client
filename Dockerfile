@@ -1,4 +1,4 @@
-FROM golang:1.15.8-alpine # base image
+FROM golang:1.15.8-alpine
 RUN mkdir /app
 ADD . /app
 WORKDIR /app
