@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 
@@ -21,26 +20,20 @@ type repoDataStruct struct {
 type repoDataMap []repoDataStruct
 
 func api(w http.ResponseWriter, r *http.Request) {
+	origin := "mattcullenmeyer/github-server-and-client"
+	stars := repostars.GetRepoStars(origin)
 	data := repoDataMap{
 		repoDataStruct{
-			Repo:  "Test Repo",
-			Stars: "Test Stars",
+			Repo:  origin,
+			Stars: stars,
 		},
 	}
 	// encode data array into a JSON string
 	json.NewEncoder(w).Encode(data)
 }
 
-func testPage(w http.ResponseWriter, r *http.Request) {
-	url := "https://api.github.com/repos/jasonrudolph/keyboard"
-	txt := repostars.GetRepoStars(url)
-	fmt.Fprintf(w, txt)
-	fmt.Println("Endpoint Hit: homePage")
-}
-
 func handleRequests() {
 	// Create REST endpoint for API, mapping it to api function
-	http.HandleFunc("/test", testPage)
 	http.HandleFunc("/api", api)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

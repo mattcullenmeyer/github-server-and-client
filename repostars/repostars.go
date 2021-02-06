@@ -2,6 +2,7 @@ package repostars
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -12,7 +13,10 @@ type github struct {
 	Stars int `json:"stargazers_count"`
 }
 
-func GetRepoStars(url string) string {
+// GetRepoStars is a function to return number of stars for a given repo
+func GetRepoStars(origin string) string {
+	url := fmt.Sprintf("https://api.github.com/repos/%s", origin)
+	fmt.Println(url)
 	res, err := http.Get(url)
 	if err != nil {
 		log.Fatal(err)
@@ -23,11 +27,11 @@ func GetRepoStars(url string) string {
 		log.Fatal(err)
 	}
 
-	github1 := github{}
-	jsonErr := json.Unmarshal(body, &github1)
+	result := github{}
+	jsonErr := json.Unmarshal(body, &result)
 	if jsonErr != nil {
 		log.Fatal(err)
 	}
-	txt := strconv.Itoa(github1.Stars)
+	txt := strconv.Itoa(result.Stars)
 	return txt
 }
