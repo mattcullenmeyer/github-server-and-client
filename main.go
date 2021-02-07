@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 
@@ -17,50 +16,38 @@ type apiStruct struct {
 	Stars      string `json:"Stars"`
 }
 
-// Create map for API using above struct as type
-//type repoDataMap []repoDataStruct
-
 func api(w http.ResponseWriter, r *http.Request) {
 
+	// https://golangcode.com/get-a-url-parameter-from-a-request/
 	query := r.URL.Query()
 
 	repos, ok := query["repo"]
 
 	if !ok || len(repos) == 0 {
-		fmt.Println("repos not present")
+		log.Println("Url Param 'repo' is missing")
+		return
 	}
 
-	data := []apiStruct{}
-	for i := 0; i < len(repos); i++ {
-		origin := repos[i]
-		stars := repostars.GetRepoStars(origin)
-		data = append(data, apiStruct{Repository: origin, Stars: stars})
+	// Query()["repo"] will return an array of items,
+	// but we only want the first item
+	repo := repos[0]
+
+	// Run GetRepoStars function from repostars package,
+	// which will make a request to the GitHub API
+	// to get the number of stars for a given username/repository
+	stars := repostars.GetRepoStars(repo)
+	data := apiStruct{
+		Repository: repo,
+		Stars:      stars,
 	}
 
-	// encode data array into a JSON string
+	// Encode data array into a JSON string
 	json.NewEncoder(w).Encode(data)
-}
-
-func test(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Incoming request")
-
-	query := r.URL.Query()
-
-	repos, ok := query["repo"]
-
-	if !ok || len(repos) == 0 {
-		fmt.Println("repos not present")
-	}
-
-	for i := 0; i < len(repos); i++ {
-		fmt.Println(repos[i])
-	}
 }
 
 func handleRequests() {
 	// Create REST endpoint for API, mapping it to api function
 	http.HandleFunc("/api", api)
-	http.HandleFunc("/test", test)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
