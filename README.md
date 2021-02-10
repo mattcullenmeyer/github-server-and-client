@@ -1,6 +1,6 @@
 ## GitHub Stargazer Server
 
-The GitHub Stargazer Server provides an API to easily request how many stars a given GitHub respository has received. 
+The GitHub Stargazer Server provides an API to easily request how many stars a given GitHub repository has received. 
 
 ### Running the Server
 
