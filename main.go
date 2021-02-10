@@ -9,11 +9,11 @@ import (
 )
 
 func home(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotFound) // return status code 404
 	fmt.Fprintf(w, "404 page not found.\n")
 	fmt.Fprintf(w, "Url format should be http://localhost:8080/api?repo=<organization>/<repository>\n")
 	fmt.Fprintf(w, "For example, the api call to get number of stargazers for https://github.com/mattcullenmeyer/anaplan should be:\n")
 	fmt.Fprintf(w, "http://localhost:8080/api?repo=mattcullenmeyer/anaplan")
-	return
 }
 
 func handleRequests() {

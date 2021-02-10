@@ -31,6 +31,7 @@ func API(w http.ResponseWriter, r *http.Request) {
 
 	// Make sure query parameter(s) for "repo" key isn't missing
 	if !ok || len(repos) == 0 {
+		w.WriteHeader(http.StatusBadRequest) // return status code 400
 		fmt.Fprintf(w, "Error: Url parameter 'repo' is missing.\n")
 		fmt.Fprintf(w, "The url format should be http://localhost:8080/api?repo=<organization>/<repository>\n")
 		fmt.Fprintf(w, "For example, the api call to get number of stargazers for https://github.com/mattcullenmeyer/anaplan should be:\n")
@@ -49,6 +50,7 @@ func API(w http.ResponseWriter, r *http.Request) {
 
 	// Return error message if GitHub respository is not found
 	if stars == "Not Found" {
+		w.WriteHeader(http.StatusBadRequest) // return status code 400
 		errorMessage := fmt.Sprintf("The following is not a valid public GitHub respository: https://github.com/%s", repo)
 		fmt.Fprintf(w, errorMessage)
 		return
