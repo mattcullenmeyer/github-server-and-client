@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/mattcullenmeyer/github-server-and-client/serverapi"
+	"github.com/mattcullenmeyer/github-stargazer-server/serverapi"
 )
 
 func home(w http.ResponseWriter, r *http.Request) {

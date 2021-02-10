@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/mattcullenmeyer/github-server-and-client/serverapi"
+	"github.com/mattcullenmeyer/github-stargazer-server/serverapi"
 )
 
 // https://golang.org/pkg/net/http/httptest/

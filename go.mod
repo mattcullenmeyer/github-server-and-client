@@ -1,3 +1,3 @@
-module github.com/mattcullenmeyer/github-server-and-client
+module github.com/mattcullenmeyer/github-stargazer-server
 
 go 1.15

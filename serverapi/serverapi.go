@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/mattcullenmeyer/github-server-and-client/repostars"
+	"github.com/mattcullenmeyer/github-stargazer-server/repostars"
 )
 
 // https://tutorialedge.net/golang/creating-restful-api-with-golang/
