@@ -7,12 +7,12 @@ The GitHub Stargazer Server provides an API to easily request how many stars a g
 Get started by cloning the repo:  
 `$ git clone https://github.com/mattcullenmeyer/github-stargazer-server.git`  
 
-Navigate to the root directory of the project and enter the following command:
-`$ git mod init github.com/mattcullenmeyer/github-stargazer-server`
+Once cloned, navigate to the root directory of the project:
+`$ cd github-stargazer-server`
 
 ### Running the Server
 
-Once cloned, you can build and run the server as a docker container.  
+You can build and run the server as a docker container.  
 Run the following commands in the root directory of the project:  
 `$ docker build -t github-server .`  
 `$ docker run -it -p 8080:8080 github-server`

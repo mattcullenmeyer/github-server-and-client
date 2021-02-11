@@ -10,10 +10,7 @@ import (
 )
 
 type github struct {
-	Stars int `json:"stargazers_count"`
-}
-
-type notFound struct {
+	Stars   int    `json:"stargazers_count"`
 	Message string `json:"message"`
 }
 
@@ -36,21 +33,6 @@ func GetRepoStars(origin string) string {
 		log.Fatal(err)
 	}
 
-	// Parse body of response with nonFound struct
-	found := notFound{}
-	foundErr := json.Unmarshal(body, &found)
-	// Log any errors
-	if foundErr != nil {
-		log.Fatal(foundErr)
-	}
-	// Check to make sure url is valid
-	// If "message": "Not Found" is returned
-	// then return "Not Found" (instead of number of stars)
-	message := found.Message
-	if message == "Not Found" {
-		return message
-	}
-
 	// Parse body of response with github struct
 	result := github{}
 	jsonErr := json.Unmarshal(body, &result)
@@ -58,6 +40,14 @@ func GetRepoStars(origin string) string {
 	if jsonErr != nil {
 		log.Fatal(jsonErr)
 	}
+
+	// Check to make sure url is valid
+	// If "message": "Not Found" is returned
+	// then return message (instead of number of stars)
+	if result.Message == "Not Found" {
+		return result.Message
+	}
+
 	// Convert Stars (type int) to type string
 	stars := strconv.Itoa(result.Stars)
 	// Return number of stars for given respository
