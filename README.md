@@ -2,10 +2,15 @@
 
 The GitHub Stargazer Server provides an API to easily request how many stars a given GitHub repository has received. 
 
-### Running the Server
+### Getting Started
 
 Get started by cloning the repo:  
 `$ git clone https://github.com/mattcullenmeyer/github-stargazer-server.git`  
+
+Navigate to the root directory of the project and enter the following command:
+`$ git mod init github.com/mattcullenmeyer/github-stargazer-server`
+
+### Running the Server
 
 Once cloned, you can build and run the server as a docker container.  
 Run the following commands in the root directory of the project:  
@@ -19,7 +24,7 @@ For example:
 
 ### Running Tests
 
-The Stargazer Server includes unit tests that you can run to ensure the server is working properly.  
+The GitHub Stargazer Server includes unit tests that you can run to ensure the server is working properly.  
 
 Run the tests by entering the following command in the root directory of the project.  
 `$ go test`

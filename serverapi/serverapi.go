@@ -16,6 +16,10 @@ type apiStruct struct {
 	Stars      string `json:"Stars"`
 }
 
+type apiError struct {
+	Message string `json:"message"`
+}
+
 // API is a function to generate JSON string
 // that tells how many stargazers a given GitHub repo has
 func API(w http.ResponseWriter, r *http.Request) {
@@ -48,11 +52,13 @@ func API(w http.ResponseWriter, r *http.Request) {
 	// to get the number of stars for a given username/repository
 	stars := repostars.GetRepoStars(repo)
 
-	// Return error message if GitHub respository is not found
+	// Return error message if GitHub repository is not found
 	if stars == "Not Found" {
 		w.WriteHeader(http.StatusBadRequest) // return status code 400
-		errorMessage := fmt.Sprintf("The following is not a valid public GitHub respository: https://github.com/%s", repo)
-		fmt.Fprintf(w, errorMessage)
+		errorTxt := fmt.Sprintf("The following is not a valid public GitHub repository: https://github.com/%s", repo)
+		//fmt.Fprintf(w, errorMessage)
+		errorMessage := apiError{Message: errorTxt}
+		json.NewEncoder(w).Encode(errorMessage)
 		return
 	}
 
