@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stargazer-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stargazer-server
+  template:
+    metadata:
+      labels:
+        app: stargazer-server
+    spec:
+      containers:
+      - name: stargazer-server-container
+        image: mattcullenmeyer/github-stargazer-server
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
