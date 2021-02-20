@@ -7,10 +7,10 @@ The GitHub Stargazer Server provides an API to easily request how many stars a g
 Get started by cloning the repo:  
 `$ git clone https://github.com/mattcullenmeyer/github-stargazer-server.git`  
 
-Once cloned, navigate to the root directory of the project:
+Once cloned, navigate to the root directory of the project:   
 `$ cd github-stargazer-server`
 
-### Running the Server
+### Running Server (Docker)
 
 You can build and run the server as a docker container.  
 Run the following commands in the root directory of the project:  
@@ -28,3 +28,18 @@ The GitHub Stargazer Server includes unit tests that you can run to ensure the s
 
 Run the tests by entering the following command in the root directory of the project.  
 `$ go test`
+
+### Running Server (Kubernetes)
+
+The GitHub Stargazer Server can alterantively run on local Kubernetes with minikube.   
+
+Run the following commands in the root directory of the project:   
+`$ minikube start`   
+`$ kubectl create -f deployment.yaml`   
+`$ kubectl apply -f service.yaml`   
+
+Now that the server is running, you need to determine the correct url path with the following command:   
+`$ minikube service stargazer-server --url`  
+
+If the returned url is, say, `http://192.168.49.2:30893`, then a valid API request could look something like this:  
+`http://192.168.49.2:30893/api?repo=mattcullenmeyer/github-stargazer-server`   
