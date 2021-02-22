@@ -18,9 +18,9 @@ Run the following commands in the root directory of the project:
 `$ docker run -it -p 8080:8080 github-server`
 
 Now that the server is running, you can make API requests using the following format:  
-`$ http://localhost:8080/api?repo=<organization>/<password>`  
+`http://localhost:8080/api?repo=<organization>/<password>`  
 For example:  
-`$ http://localhost:8080/api?repo=mattcullenmeyer/github-stargazer-server`
+`http://localhost:8080/api?repo=mattcullenmeyer/github-stargazer-server`
 
 ### Running Tests
 
@@ -38,8 +38,8 @@ Run the following commands in the root directory of the project:
 `$ kubectl create -f deployment.yaml`   
 `$ kubectl apply -f service.yaml`   
 
-Now that the server is running, you need to determine the correct url path with the following command:   
-`$ minikube service stargazer-server --url`  
+Now that the server is running, you need to determine the correct url path with the following command (be sure to keep the terminal open if you are on Windows).  
+`$ minikube service stargazer-server`  
 
 If the returned url is, say, `http://192.168.49.2:30893`, then a valid API request could look something like this:  
 `http://192.168.49.2:30893/api?repo=mattcullenmeyer/github-stargazer-server`   
